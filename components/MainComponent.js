@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Dishdetail from './DishDetailComponent';
+import Contact from './ContactComponent';
+import About from  './AboutComponent';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -64,6 +66,54 @@ const HomeNavigator = createStackNavigator();
      );
  };
 
+ const ContactNavigator =createStackNavigator();
+
+    function ContactNavigatorScreen(){
+        return(
+            <ContactNavigator.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"            
+                }
+            }}
+            >
+            <ContactNavigator.Screen
+            name='Contact Us'
+            component={Contact}
+            />
+
+            </ContactNavigator.Navigator>
+        );
+    }
+
+    const AboutNavigator = createStackNavigator();
+
+    function AboutNavigatorScreen(){
+        return(
+            <AboutNavigator.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"            
+                }
+            }}
+            >
+            <AboutNavigator.Screen
+            name="About Us"
+            component={About}
+            />
+
+            </AboutNavigator.Navigator>
+        );
+    }
+
  const Drawer = createDrawerNavigator();
 
  function MainNavigatorScreen(){
@@ -81,9 +131,19 @@ const HomeNavigator = createStackNavigator();
            options={{title:'Home',drawerLabel:'Home'}}
          />
          <Drawer.Screen
+         name = "About Us"
+         component={AboutNavigatorScreen}
+         options={{title:'About Us', drawerLabel:'About Us'}}
+         />
+         <Drawer.Screen
          name="Menu"
          component={MenuNavigatorScreen}
          options={{title:'Menu',drawerLabel:'Menu'}}
+         />
+         <Drawer.Screen
+         name="Contact"
+         component={ContactNavigatorScreen}
+         options={{title:"Contact Us",drawerLabel:'Contact Us'}}
          />
 
      </Drawer.Navigator>
