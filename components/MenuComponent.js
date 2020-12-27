@@ -1,52 +1,50 @@
-import React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import { ListItem, Avatar} from 'react-native-elements'
+import React from 'react';
+import { FlatList } from 'react-native';
+import { ListItem,} from 'react-native-elements';
+import {DISHES} from '../shared/dishes';
 
 
 /**
 * @author
 * @function Menu
 **/
-const Menu = (props) => {
-
-    const renderMenuItem = ({item, index}) =>{
-        return(
-           /* <ListItem >
-                <Image rounded source={require('./images/vadonut.png')}/>
-                <ListItem.Title>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-
-            </ListItem>*/
-
-            <ListItem
-                key ={index} 
-                title={item.name}
-                subtitle={item.description}
-                onPress={() => props.onPress(item.id)}
-                leftAvatar={{ source: require('./images/uthappizza.png')}}
-            />
-              
-              
-           
-        )
+class Menu extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            dishes : DISHES
+        }
     }
 
+    static navigationOptions={
+        title: 'Menu'
+    }
+
+    render(){
+        const renderMenuItem = ({item, index}) =>{
+            return(
+                <ListItem
+                    key ={index} 
+                    title={item.name}
+                    subtitle={item.description}
+                    onPress={() => navigate('Dishdetail', { dishId: item.id })}
+                    leftAvatar={{ source: require('./images/uthappizza.png')}}
+                />     
+            );
+        };
+
+        const {navigate} = this.props.navigation;
 
  return(
         <FlatList
-            data={props.dishes}
+            data={this.state.dishes}
             renderItem = {renderMenuItem}
             keyExtractor = {item => item.id.toString()}
         />
   )
 }
+}
 
 
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   justifyContent: 'center',
-   alignItems: 'center',
-  }
-})
+
 export default Menu
