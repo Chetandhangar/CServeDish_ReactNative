@@ -18,6 +18,7 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-elements": "^3.0.0-alpha.1",
+    "react-native-fontawesome": "^7.0.0",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-material-textfield": "https://github.com/javarahulsharma/react-native-material-textfield.git",
     "react-native-reanimated": "~1.9.0",
