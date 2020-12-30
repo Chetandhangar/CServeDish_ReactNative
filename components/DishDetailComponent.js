@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView, FlatList} from 'react-native';
 import { Card } from 'react-native-elements';
-import {DISHES} from '../shared/dishes';
+import {DISHES} from '../shared/dishes';;
+import {COMMENTS} from '../shared/comments'
 
 function RenderDish(props) {
 
@@ -23,17 +24,51 @@ function RenderDish(props) {
         }
 }
 
+function RenderComment(props){
+    const comments = props.comments;
+
+    const renderCommentItem = ({item,index}) =>{
+            return(
+               <View key={index} style={{margin: 10}}>
+                   <Text style={{fontSize:14}}>{item.comment}</Text>
+                    <Text style={{fontSize:12}}>{item.rating}</Text>
+                    <Text style={{fontSize:12}}>{'~~ ' + item.author}</Text>
+               </View>
+            );
+    }
+    if(comments !=null){
+        return(
+            <Card title="Comments">
+                <FlatList 
+                data={comments}
+                renderItem={renderCommentItem}
+                keyExtractor={item => item.id.toString()}
+                />
+            </Card>
+        );
+    }
+    else{
+        return(<View></View>)
+    }
+  
+}
+
 class Dishdetail extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            dishes: DISHES
+            dishes: DISHES,
+            comments: COMMENTS
         }
     }
     render(){
         const dishId = this.props.route.params.dishId;
         return(
-        <RenderDish dish={this.state.dishes[+dishId]} />
+            <ScrollView>
+                <RenderDish dish={this.state.dishes[+dishId]} />
+                <RenderComment comments={this.state.comments.filter((comment)=> comment.dishId === dishId)}/>
+            </ScrollView>
+        
         );
     }
  

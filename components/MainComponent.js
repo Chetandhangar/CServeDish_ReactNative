@@ -136,6 +136,7 @@ const HomeNavigator = createStackNavigator();
 
  const Drawer = createDrawerNavigator();
 
+ //Custom Drawer for logo
  function CustomDrawerContentComponent (props) {
      return(
         <DrawerContentScrollView {...props}>
@@ -145,12 +146,11 @@ const HomeNavigator = createStackNavigator();
                     style={styles.drawerImage}/>
                 </View>
                 <View style={{flex:2}}>
-                    <Text style={styles.drawerHeaderText}>Ristorento De ConFusion</Text>
+                    <Text style={styles.drawerHeaderText}>Ristorento Con Fusion</Text>
                 </View>
             </View>
         <DrawerItemList {...props}/>
     </DrawerContentScrollView>
-  
      );
  }
 
@@ -158,12 +158,11 @@ const HomeNavigator = createStackNavigator();
      return(
      <Drawer.Navigator
        initialRouteName='Home'
-       drawerContent={props => <CustomDrawerContentComponent {...props} />}
+       drawerContent={props => <CustomDrawerContentComponent {...props} />} //Allows you to create custom drawer
        drawerStyle={{
         backgroundColor: '#C9DFE7',
         width: 240,
        }}
-
      >
          <Drawer.Screen 
            name="Home"
