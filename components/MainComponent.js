@@ -4,10 +4,11 @@ import Menu from './MenuComponent';
 import Dishdetail from './DishDetailComponent';
 import Contact from './ContactComponent';
 import About from  './AboutComponent';
-import {NavigationContainer} from '@react-navigation/native';
+import {Text, StyleSheet , Image,View, ScrollView} from 'react-native'
+import {NavigationContainer, } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import {Icon} from 'react-native-elements';
+import { createDrawerNavigator, DrawerItemList,SafeAreaView, DrawerContentScrollView } from '@react-navigation/drawer';
+import {Icon, Avatar} from 'react-native-elements';
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 /**
 * @auhor
@@ -135,14 +136,34 @@ const HomeNavigator = createStackNavigator();
 
  const Drawer = createDrawerNavigator();
 
+ function CustomDrawerContentComponent (props) {
+     return(
+        <DrawerContentScrollView {...props}>
+            <View style={styles.drawerHeader}>
+                <View style={{flex:1}}>
+                    <Image source={require('./images/logo.png')}
+                    style={styles.drawerImage}/>
+                </View>
+                <View style={{flex:2}}>
+                    <Text style={styles.drawerHeaderText}>Ristorento De ConFusion</Text>
+                </View>
+            </View>
+        <DrawerItemList {...props}/>
+    </DrawerContentScrollView>
+  
+     );
+ }
+
  function MainNavigatorScreen(){
      return(
      <Drawer.Navigator
        initialRouteName='Home'
+       drawerContent={props => <CustomDrawerContentComponent {...props} />}
        drawerStyle={{
         backgroundColor: '#C9DFE7',
         width: 240,
        }}
+
      >
          <Drawer.Screen 
            name="Home"
@@ -191,7 +212,7 @@ const HomeNavigator = createStackNavigator();
          />
         ),}}
          />
-
+        
      </Drawer.Navigator>
      );
  }
@@ -209,6 +230,29 @@ class Main extends Component {
   }
  }
 
+ const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    drawerHeader: {
+      backgroundColor: '#512DA8',
+      height: 140,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+      flexDirection: 'row'
+    },
+    drawerHeaderText: {
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'bold'
+    },
+    drawerImage: {
+      margin: 10,
+      width: 80,
+      height: 60
+    }
+  });
 
 
 export default Main
