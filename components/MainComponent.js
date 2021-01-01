@@ -8,7 +8,7 @@ import {Text, StyleSheet , Image,View, ScrollView} from 'react-native'
 import {NavigationContainer, } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList,SafeAreaView, DrawerContentScrollView } from '@react-navigation/drawer';
-import {Icon, Avatar} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 /**
 * @auhor

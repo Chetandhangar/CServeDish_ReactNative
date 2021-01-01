@@ -15,6 +15,7 @@
     "@react-navigation/stack": "5.9.0",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
+    "json-server": "^0.16.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
@@ -27,7 +28,11 @@
     "react-native-safe-area-view": "^1.1.1",
     "react-native-screens": "~2.9.0",
     "react-native-vector-icons": "^7.1.0",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
