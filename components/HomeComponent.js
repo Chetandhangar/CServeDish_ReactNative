@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {Card} from 'react-native-elements';
-import {DISHES} from '../shared/dishes';
-import {LEADERS} from '../shared/leaders';
-import {PROMOTIONS} from '../shared/promotions';
+import {connect} from 'react-redux';
+import {baseUrl} from '../shared/baseUrl';
+
+const mapStateToProps = state =>{
+    return{
+    dishes : state.dishes,
+    comments : state.comments,
+    leaders : state.leaders,
+    promotions : state.promotions 
+    };
+
+}
 
 function RenderItem(props){
     const item = props.item;
@@ -13,7 +22,7 @@ function RenderItem(props){
             <Card
             featuredTitle={item.name}
             featuredSubtitle={item.designation}
-            image={require('./images/uthappizza.png')}
+            image={{uri : baseUrl + item.image}}
             >
             <Text
             style={{margin:10}}>
@@ -29,14 +38,6 @@ function RenderItem(props){
 
 class Home extends Component{
 
-    constructor(props){
-        super(props);
-        this.state={
-            dishes: DISHES,
-            leaders:LEADERS,
-            promotions : PROMOTIONS
-        }
-    }
 
     static navigationOptions ={
         title :'Home'
@@ -46,17 +47,17 @@ class Home extends Component{
         return(
             <ScrollView>
                 <RenderItem 
-                item={this.state.dishes.filter((dish)=> dish.featured)[0]}
+                item={this.props.dishes.dishes.filter((dish)=> dish.featured)[0]}
                 />
                 <RenderItem
-                item={this.state.leaders.filter((leader) => leader.featured)[0]}
+                item={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
                  />
                  <RenderItem
-                 item={this.state.promotions.filter((promo)=> promo.featured)[0]}
+                 item={this.props.promotions.promotions.filter((promo)=> promo.featured)[0]}
                  />
             </ScrollView>
         );
     }
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);
