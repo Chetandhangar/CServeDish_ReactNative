@@ -4,6 +4,7 @@ import Menu from './MenuComponent';
 import Dishdetail from './DishDetailComponent';
 import Contact from './ContactComponent';
 import About from  './AboutComponent';
+import  Reservation  from './ReservationComponent';
 import {Text, StyleSheet , Image,View, ScrollView} from 'react-native'
 import {NavigationContainer, } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -151,6 +152,35 @@ const HomeNavigator = createStackNavigator();
         );
     }
 
+    const ReservationNavigator = createStackNavigator();
+
+    function ReservationNavigatorScreen({navigation}) {
+        return(
+        <ReservationNavigator.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: "#512DA8"
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+                color: "#fff"            
+            }
+        }}
+        >
+            <ReservationNavigator.Screen 
+            name="Reserve Table"
+            component={Reservation}
+            options={{headerTitle: 'Reserve Table',
+            headerLeft:() => ( <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />)
+            }}
+            />
+
+        </ReservationNavigator.Navigator>
+        );
+    }
+
  const Drawer = createDrawerNavigator();
 
  //Custom Drawer for logo
@@ -226,6 +256,19 @@ const HomeNavigator = createStackNavigator();
          size={22}
          color={focused ? '#7cc' : '#ccc'}
          />
+        ),}}
+         />
+         <Drawer.Screen
+         name="Reserve Table"
+         component={ReservationNavigatorScreen}
+         options={{title:"Reserve Table", drawerLabel:'Reserve Table',
+        drawerIcon:({focused}) => (
+            <Icon
+            name='cutlery'
+            type='font-awesome'
+            size={24}
+            color={focused ? '#7cc' : '#ccc'}
+            />
         ),}}
          />
         
