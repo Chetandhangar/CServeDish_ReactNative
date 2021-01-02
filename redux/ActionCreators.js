@@ -104,7 +104,7 @@ export const  fetchPromos = () => (dispatch) =>{
 };
 export const promosLoading = () =>({
     type : ActionTypes.LOADING_PROMOS
-})
+});
 
 export const promosFailed = (errmess) =>({
     type: ActionTypes.PROMOS_FAILED,
@@ -146,7 +146,7 @@ export const  fetchLeaders = () => (dispatch) =>{
 };
 export const leadersLoading = () =>({
     type : ActionTypes.LOADING_LEADERS
-})
+});
 
 export const leadersFailed = (errmess) =>({
     type: ActionTypes.LEADERS_FAILED,

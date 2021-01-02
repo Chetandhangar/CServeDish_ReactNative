@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import {Text ,ScrollView,FlatList} from 'react-native';
 import {Avatar, Card,ListItem} from 'react-native-elements';
 import {baseUrl} from '../shared/baseUrl';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {Loading} from './LoadingComponent';
 
 
 const mapStateToProps = state =>{
@@ -50,22 +51,47 @@ class About extends Component{
             );
         }
 
-        return(
-            <ScrollView>
-              <RednerHistory />
-            <Card>
-                <Card.Title style={{fontSize:20}}>Corporate Leadership</Card.Title>
-                <Card.Divider/>
-            <FlatList
-            data={this.props.leaders.leaders}
-            renderItem={renderAboutItem}
-            keyExtractor={item => item.id.toString()}
-            />
-            </Card>
-          
-            </ScrollView>
-          
-        );
+
+        if (this.props.leaders.isLoading) {
+            return(
+                <ScrollView>
+                    <History />
+                    <Card
+                        title='Corporate Leadership'>
+                        <Loading />
+                    </Card>
+                </ScrollView>
+            );
+        }
+        else if(this.props.leaders.errMess){
+            return(
+               <ScrollView>
+                   <RednerHistory />
+                   <Card 
+                    title="Corporate LeaderShip">
+                     <Text>{this.props.leaders.errMess}</Text>
+                   </Card>
+               </ScrollView>
+            );
+        }
+        else{
+            return(
+                <ScrollView>
+                  <RednerHistory />
+                <Card title="Corporate LeaderShip">
+                <FlatList
+                data={this.props.leaders.leaders}
+                renderItem={renderAboutItem}
+                keyExtractor={item => item.id.toString()}
+                />
+                </Card>
+              
+                </ScrollView>
+              
+            );
+        }
+
+       
     }
 }
 
