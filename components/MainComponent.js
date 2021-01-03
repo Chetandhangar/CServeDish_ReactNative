@@ -5,6 +5,7 @@ import Dishdetail from './DishDetailComponent';
 import Contact from './ContactComponent';
 import About from  './AboutComponent';
 import  Reservation  from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 import {Text, StyleSheet , Image,View, ScrollView} from 'react-native'
 import {NavigationContainer, } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -181,6 +182,36 @@ const HomeNavigator = createStackNavigator();
         );
     }
 
+    //Favorites component Navigator
+    
+    const  FavoriteNavigator = createStackNavigator();
+
+    function FavoriteNavigatorScreen({navigation}){
+        return(
+            <FavoriteNavigator.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"            
+                }
+            }}
+            >
+            <FavoriteNavigator.Screen 
+            name = "My Favorites"
+            component={Favorites}
+            options={{headerTitle: 'My Favorites',
+            headerLeft:() => ( <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />)
+            }}
+            />
+            </FavoriteNavigator.Navigator>
+        );
+    }
+
  const Drawer = createDrawerNavigator();
 
  //Custom Drawer for logo
@@ -257,6 +288,20 @@ const HomeNavigator = createStackNavigator();
          color={focused ? '#7cc' : '#ccc'}
          />
         ),}}
+         />
+         <Drawer.Screen 
+         name="My Favorites"
+         component={FavoriteNavigatorScreen}
+         options={{title : "My Favorites", drawerLabel: 'My Favorites',
+         drawerIcon:({focused}) =>(
+            <Icon 
+            name = 'heart'
+            type= 'font-awesome'
+            size={24}
+            color={focused ? "#7cc" : "#ccc"}
+            />
+         ),
+         }}
          />
          <Drawer.Screen
          name="Reserve Table"
