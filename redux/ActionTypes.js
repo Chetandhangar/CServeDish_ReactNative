@@ -11,4 +11,5 @@ export const ADD_PROMOS = 'ADD_PROMOS';
 export const PROMOS_FAILED = 'PROMOS_FAILED';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const POST_FAVORITE = 'POST_FAVORITE';
+export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const ADD_COMMENT = "ADD_COMMENT";
