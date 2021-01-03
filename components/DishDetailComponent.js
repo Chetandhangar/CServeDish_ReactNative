@@ -110,7 +110,12 @@ class Dishdetail extends React.Component {
 
     handleSubmit(dishId){
         this.props.postComment(dishId, this.state.rating, this.state.author, this.state.comment);
-        this.toggleModal();
+        this.setState({
+            rating: 0,
+            author: '',
+            comment : '',
+            showModal : false
+        })
     }
 
     render(){
