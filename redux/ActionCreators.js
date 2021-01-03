@@ -34,6 +34,27 @@ export const addComments = (comments) =>({
     payload : comments
 });
 
+//add comment to the comment list from the user Input value
+export const addComment = (comment) =>({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+
+export const postComment = (dishId, rating, author , comment) => (dispatch) => {
+    const newComment = {
+        dishId : dishId,
+        rating : rating,
+        author : author,
+        comment : comment
+    };
+    newComment.date = new Date().toISOString();
+
+    setTimeout(() => {
+        dispatch(addComment(newComment));
+    }, 2000);
+};
+
 //Action Creator for Dishes
 
 export const  fetchDishes = () => (dispatch) =>{
