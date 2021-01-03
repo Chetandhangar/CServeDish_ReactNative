@@ -20,6 +20,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
+    "react-native-animatable": "1.2.4",
     "react-native-datepicker": "1.7.2",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-fontawesome": "^7.0.0",
