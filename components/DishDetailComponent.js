@@ -124,7 +124,7 @@ class Dishdetail extends React.Component {
             <ScrollView>
                 <RenderDish dish={this.props.dishes.dishes[+dishId]} 
                  favorite={this.props.favorites.some(el => el === dishId)}
-                 markFavorite={() => this.markFavorite(dishId)}
+                 markedFavorite={() => this.markedFavorite(dishId)}
                  toggleModal={()=>{this.toggleModal()}}
                 />
                 <RenderComment comments={this.props.comments.comments.filter((comment)=> comment.dishId === dishId)}/>
