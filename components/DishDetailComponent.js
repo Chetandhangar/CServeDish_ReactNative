@@ -39,16 +39,26 @@ import {postFavorite, postComment} from '../redux/ActionCreators';
                 return false;
             }
         }
+        
+        const recognizeComment = ({moveX, moveY, dx, dy}) =>{
+            if(dx > 200){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+       
 
         const panResponder = PanResponder.create({
             onStartShouldSetPanResponder : (e, gestureState) =>{
                 return true;
             },
-
             onPanResponderGrant: () => {this.view.rubberBand(1000).then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));},
+          
             onPanResponderEnd : (e, gestureState) =>{
                 console.log("Pan response End" , gestureState);
-                if(recognizeDrag(gestureState))
+                if(recognizeDrag(gestureState)){
                     Alert.alert(
                         "Add Favorite",
                         'Are you sure you wish to add'+ dish.name + 'as favorite dish',
@@ -65,6 +75,10 @@ import {postFavorite, postComment} from '../redux/ActionCreators';
                         ],
                         {cancelable : false}
                     );
+                }
+                    else if(recognizeComment(gestureState)){
+                        toggleModal();
+                    }
                     return true ;
                
             }
@@ -75,7 +89,6 @@ import {postFavorite, postComment} from '../redux/ActionCreators';
             return(
                 <Animatable.View animation="fadeInDown" duration={2000} delay={1000}
                  ref={this.handleViewRef} 
-
                 {...panResponder.panHandlers}
                 >
                 <Card
