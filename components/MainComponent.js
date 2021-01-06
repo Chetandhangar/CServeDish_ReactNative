@@ -5,6 +5,7 @@ import Dishdetail from './DishDetailComponent';
 import Contact from './ContactComponent';
 import About from  './AboutComponent';
 import  Reservation  from './ReservationComponent';
+import Login from './LoginComponent';
 import Favorites from './FavoriteComponent';
 import {Text, StyleSheet , Image,View, ScrollView} from 'react-native'
 import {NavigationContainer, } from '@react-navigation/native';
@@ -33,6 +34,33 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
+const LoginNavigator = createStackNavigator();
+
+function LoginNavigatorScreen({navigation}){
+    return(
+        <LoginNavigator.Navigator
+        screenOptions={{
+            headerStyle:{
+                backgroundColor: "#512DAB"
+            },
+            headerTintColor:"#fff",
+            headerTitleStyle:{
+                color: "#fff"
+            }
+        }}
+        >
+            <LoginNavigator.Screen
+            name="Login"
+            component={Login}
+            options={{headerTitle:'Login',
+            headerLeft:() => ( <Icon name="menu" size={24} 
+            color= 'white'
+            onPress={ () => navigation.toggleDrawer() } />)
+            }}
+            />
+        </LoginNavigator.Navigator>
+    );
+}
 
 const MenuNavigator = createStackNavigator();
 
@@ -242,6 +270,19 @@ const HomeNavigator = createStackNavigator();
         width: 240,
        }}
      >
+         <Drawer.Screen 
+         name= "Login"
+         component={LoginNavigatorScreen}
+         options={{title:'Login',drawerLabel:'Login',
+         drawerIcon: ({focused})=>(
+          <Icon
+          name='sign-in'
+          type='font-awesome'
+          size={22}
+          color={focused ? '#7cc' : '#ccc'}
+          />
+         ),}}
+         />
          <Drawer.Screen 
            name="Home"
            component={HomeNavigatorScreen}
