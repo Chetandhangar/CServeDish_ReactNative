@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, PanResponder, Alert} from 'react-native';
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, PanResponder, Alert, Share} from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {baseUrl} from '../shared/baseUrl';
 import {connect} from 'react-redux';
 import {postFavorite, postComment} from '../redux/ActionCreators';
+
 
 
 
@@ -20,6 +21,16 @@ import {postFavorite, postComment} from '../redux/ActionCreators';
         postFavorite : (dishId) => dispatch(postFavorite(dishId)),
         postComment : (dishId, rating, author, comment) => dispatch(postComment(dishId,rating,author,comment)),
     });
+
+    const ShareDish = (title, message , url) =>{
+        Share.share({
+            title : title,
+            message : title + '  ' + message + '  ' + url,
+            url : url
+        }, {
+            dialogTitle : 'Share ' + title
+        })
+    }
 
     function RenderDish({
         dish,
@@ -111,6 +122,13 @@ import {postFavorite, postComment} from '../redux/ActionCreators';
                 color= "#512DA8"
                 type='font-awesome'
                 onPress={()=> {toggleModal()}}
+                />
+                <Icon 
+                raised
+                name = 'share'
+                type='font-awesome'
+                color = '#51D2A8'
+                onPress={()=> {ShareDish(dish.name, dish.description, baseUrl + dish.image)}}
                 />
                 </Card>
                 </Animatable.View>

@@ -83,7 +83,7 @@ class Reservation extends Component{
            },
            android: {
             sound : true,
-            vibrate : truw,
+            vibrate : true,
             color: '#512DA8'
             
         }
