@@ -4,6 +4,7 @@ import {Card} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
 import {Loading} from './LoadingComponent';
+import { LogBox } from 'react-native';
 
 const mapStateToProps = state =>{
     return{
@@ -63,6 +64,7 @@ class Home extends Component{
 
     componentDidMount(){
         this.animate();
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
     }
 
     animate(){
@@ -96,21 +98,24 @@ class Home extends Component{
 
         return(
            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-               <Animated.View style={{width: '100%', transform:[{translateX: xpos1}]}}>
+               <Animated.View style={{width: '100%',   transform:[{translateX: xpos1}]}}
+               
+               >
                     <RenderItem 
                     item={this.props.dishes.dishes.filter((dish)=> dish.featured)[0]}
                     Loading={this.props.dishes.isLoading}
                     errMess={this.props.dishes.errMess}
                     />
                 </Animated.View>
-                <Animated.View style={{width: '100%', transform:[{translateX: xpos2}]}}>
+                <Animated.View style={{width: '100%',useNativeDriver: true, 
+                 transform:[{translateX: xpos2}]}}>
                     <RenderItem
                     item={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
                     Loading={this.props.leaders.isLoading}
                     errMess={this.props.leaders.errMess}
                     />
                 </Animated.View>
-                <Animated.View style={{width: '100%', transform:[{translateX: xpos3}]}}>
+                <Animated.View style={{width: '100%',useNativeDriver: true,  transform:[{translateX: xpos3}]}}>
                     <RenderItem
                     item={this.props.promotions.promotions.filter((promo)=> promo.featured)[0]}
                     Loading={this.props.promotions.isLoading}

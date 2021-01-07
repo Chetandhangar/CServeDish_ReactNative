@@ -4,7 +4,8 @@ import {Avatar, Card,ListItem} from 'react-native-elements';
 import {baseUrl} from '../shared/baseUrl';
 import {connect} from 'react-redux';
 import {Loading} from './LoadingComponent';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
+import {LogBox} from 'react-native'
 
 
 const mapStateToProps = state =>{
@@ -15,6 +16,9 @@ const mapStateToProps = state =>{
 
 class About extends Component{
 
+    componentDidMount() {
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    }
 
     render(){
 
