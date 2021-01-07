@@ -15,6 +15,8 @@
     "@react-navigation/native": "5.7.3",
     "@react-navigation/stack": "5.9.0",
     "expo": "~39.0.2",
+    "expo-notifications": "~0.7.2",
+    "expo-permissions": "~9.3.0",
     "expo-secure-store": "~9.2.0",
     "expo-status-bar": "~1.0.2",
     "json-server": "^0.16.3",
@@ -43,6 +45,11 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
+  },
+  "expo": {
+    "android": {
+      "useNextNotificationsApi": true
+    }
   },
   "private": true
 }

@@ -3,6 +3,8 @@ import {Text, View , ScrollView, Button, Switch, StyleSheet,Modal, Alert} from '
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-datepicker'; //to user date and time use Datepicker from react-native-community/datetimepicker
 import * as Animatable from 'react-native-animatable';
+import * as Notifications from 'expo-notifications';
+import * as Permissions  from 'expo-permissions'
 
 
 class Reservation extends Component{
@@ -47,14 +49,53 @@ class Reservation extends Component{
                },
                {
                    text : "Ok",
-                   onPress : () => {this.resetForm()},
+                   onPress : () => {
+                    this.presentLocalNotification(this.state.date);   
+                    this.resetForm();},
                    
                }
                
            ],
            
         )
+    };
+
+ 
+
+    async obtainNotificationPermission (){
+        let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS)
+        if(permission.status !== 'granted'){
+            permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
+            if(permission.status !== 'granted'){
+                Alert.alert("Permission not granted to show notification")
+            }
+        }
+        return permission;
     }
+
+    async presentLocalNotification (date) {
+        await this.obtainNotificationPermission();
+        Notifications.presentNotificationAsync({
+           title : 'Your Reservation',
+           body: 'Reservation for  ' + date + ' requested',
+           ios : {
+               sound : true
+           },
+           android: {
+            sound : true,
+            vibrate : truw,
+            color: '#512DA8'
+            
+        }
+
+        });
+        console.log('preserntLocalNotification');
+    
+
+    };
+
+    
+    
 
     render(){
         return(
